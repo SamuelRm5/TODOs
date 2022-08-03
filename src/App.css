@@ -69,17 +69,18 @@ header .header__completed{
   transform: rotate(180deg);
 }
 
-.filter{
+.filter {
+  align-items: center;
   border-radius: 6px;
-  bottom: 10px;
-  box-shadow:  0px 0px 9px 0px #0068d985;
+  background-color: white;
   display: flex;
-  flex-direction: column;
-  left: 10px;
-  height: 100px;
+  flex-direction: row;
+  top: 0;
+  left: 40%;
+  height: 30px;
   justify-content: space-around;
   position: fixed;
-  width: 30px;
+  width: 110px;
 }
 .filter button{
   background-color: #ffffff00;

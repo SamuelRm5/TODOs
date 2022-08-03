@@ -61,3 +61,8 @@
 .hidden{
     display: none;
 }
+
+.noDelete{
+    color: #4a4a4a;
+    pointer-events: none;
+}

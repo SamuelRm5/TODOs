@@ -8,6 +8,7 @@ import './App.css';
 import { saveTodos } from './helpers/localStorage';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { ModalDelete } from './components/Modals/ModalDelete';
+import { noRepeated } from './helpers/notRepeated';
 
 
 export function App() {
@@ -29,7 +30,6 @@ export function App() {
     // ----------------- TODOS managment ----------------- //
     const addTodo = (text) => {
 
-      console.log( text );
       const newTodos = [...todos];
       newTodos.push({
         completed: false,
@@ -65,7 +65,14 @@ export function App() {
       if ( event.keyCode === 13 ) {
 
         if ( emptyValidation( event.target.value ) ) {
-          addTodo(event.target.value);
+          if ( !noRepeated( todoID,todos ) === undefined ) {    
+            addTodo(event.target.value);
+            todoInput.current.value = "";
+            
+          }
+          else{
+            alert("This TODO already exists");
+          }
         }
         else {
           alert("TODO length has to contains more than 5 characters ");
@@ -112,9 +119,9 @@ export function App() {
                   onComplete={() => {
                     completeTODO( todo.text )
                   }}
-                  onDelete = {() => {
+                  onDelete = {(text) => {
                     setOpenModal( true )
-                    setTodoID( todo.text )
+                    setTodoID( text )
                   }}
                   />
                   ))
@@ -150,7 +157,7 @@ export function App() {
                 </div>
                 <div className='deleteModal__bottom'>
                   <button onClick={()=>{setOpenModal(false)}} className='deleteModal__btn btnCancel'>No</button>
-                  <button onClick={deleteTODO} className='deleteModal__btn btnSucces'>Yes</button>
+                  <button onClick={()=>{deleteTODO(todoID)}} className='deleteModal__btn btnSucces'>Yes</button>
                 </div>
                 
             </div>

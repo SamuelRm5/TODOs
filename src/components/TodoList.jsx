@@ -17,7 +17,11 @@ export const TodoList = ( props ) => {
 
             <div className={`todos__check ${props.completed && 'todos__check-completed'}`}></div>
             <p className={`todos__task ${props.completed && 'todos__task-completed'}`}>{ props.task }</p>
-            <button onClick={ props.onDelete } className='todos__button-delete'><FiTrash2 /></button>
+            {
+                (props.completed===true) ?
+                    <button onClick={() => {props.onDelete(props.task)} } className='todos__button-delete'><FiTrash2 /></button>   
+                : <button className='todos__button-delete noDelete'><FiTrash2 /></button>
+            }
         </div>
     )
 }
